@@ -11,4 +11,9 @@ void main() {
     final calc = StringCalculator();
     expect(calc.add('7'), equals(7));
   });
+
+    test('two numbers separated by comma', () {
+    final calc = StringCalculator();
+    expect(calc.add('1,2'), equals(3));
+  });
 }
