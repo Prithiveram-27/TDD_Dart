@@ -12,9 +12,17 @@ class StringCalculator {
   // }
 
   //! Handling two comma-separated numbers
+  // int add(String numbers) {
+  //   if (numbers.trim().isEmpty) return 0;
+  //   final parts = numbers.split(',');
+  //   final ints = parts.map(int.parse);
+  //   return ints.fold(0, (a, b) => a + b);
+  // }
+
+  //! Handling any amount with newline delimitter
   int add(String numbers) {
     if (numbers.trim().isEmpty) return 0;
-    final parts = numbers.split(',');
+    final parts = numbers.split(RegExp(',|\\n'));
     final ints = parts.map(int.parse);
     return ints.fold(0, (a, b) => a + b);
   }

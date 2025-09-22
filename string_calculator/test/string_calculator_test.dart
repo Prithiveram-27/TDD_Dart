@@ -16,4 +16,13 @@ void main() {
     final calc = StringCalculator();
     expect(calc.add('1,2'), equals(3));
   });
+
+  test('handles any numbers', () {
+    expect(StringCalculator().add('1,2,3,4'), equals(10));
+  });
+
+  test('handles newline as separators', () {
+    expect(StringCalculator().add('1\n2,3'), equals(6));
+  });
+
 }
