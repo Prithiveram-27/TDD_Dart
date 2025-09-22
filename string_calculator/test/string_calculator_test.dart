@@ -1,3 +1,4 @@
+import 'package:string_calculator/negative_number_exception.dart';
 import 'package:string_calculator/string_calculator.dart';
 import 'package:test/test.dart';
 
@@ -25,8 +26,35 @@ void main() {
     expect(StringCalculator().add('1\n2,3'), equals(6));
   });
 
-  test('supports custom delimiter', () {
-    expect(StringCalculator().add('//;\\n1;2'), equals(3));
+test('supports custom delimiter', () {
+    expect(StringCalculator().add('//;\n1;2'), equals(3));
+  });
+
+
+  test('throws on single negative', () {
+    expect(
+      () => StringCalculator().add('-1'),
+      throwsA(
+        predicate(
+          (e) =>
+              e is NegativeNumberException &&
+              e.toString() == 'negative numbers not allowed -1',
+        ),
+      ),
+    );
+  });
+
+  test('lists all negatives in message', () {
+    expect(
+      () => StringCalculator().add('2,-4,3,-5'),
+      throwsA(
+        predicate(
+          (e) =>
+              e is NegativeNumberException &&
+              e.toString() == 'negative numbers not allowed -4,-5',
+        ),
+      ),
+    );
   });
 
 }
